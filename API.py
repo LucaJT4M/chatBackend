@@ -7,14 +7,14 @@ app = FastAPI()
 def add_user(username: str, password: str):
     return create_user(username, password)
 
-@app.delete("/delete_user/{user_id}")
+@app.delete("/delete_user/{username},{password}")
 def del_user(username: str, password: str):
-    return delete_user(user_id)
+    return delete_user
 
 @app.get("/show_chat/{chat_id}")
 def show_chat(chat_id: int):
     # Chat anzeigen lassen
-    return get_chats()
+    return "user1_id, user2_id, chat_id"
 
 @app.get("/users")
 def users(): 
