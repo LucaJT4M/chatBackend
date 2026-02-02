@@ -7,18 +7,42 @@ app = FastAPI()
 def add_user(username: str, password: str):
     return create_user(username, password)
 
-@app.delete("/delete_user/{username},{password}")
-def del_user(username: str, password: str):
-    return delete_user
+@app.delete("/delete_user/{user_id}")
+def del_user(user_id: int):
+    if delete_user(user_id):
+        return f"User mit der ID: {user_id} wurde gelöscht."
+    else:
+        return "User konnte nicht gelöscht werden."
 
 @app.get("/show_chat/{chat_id}")
 def show_chat(chat_id: int):
     # Chat anzeigen lassen
-    return "user1_id, user2_id, chat_id"
+    return get_chats()
 
 @app.get("/users")
 def users(): 
-    return "Hallo"
+    return get_users()
+
+@app.get("/login/{username},{password}")
+def login(username: str, password: str):
+
+    response = {
+        "login": False,
+        "msg": "Logindaten falsch"
+    }
+
+    user = get_user_by_name(username)
+    if user:
+        if user.password == password:
+            response["msg"] = "Passwort ist richtig, Sie werden eingeloggt."
+            response["login"] = True
+        else:
+            response["msg"] = "Passwort falsch, bitte erneut versuchen."
+    else:
+        response["msg"] = "User wurde nicht gefunden."
+
+    return response
+
 
 @app.post("/send_message/{username1},{username2},{message}")
 async def send_message(user1_id: int, user2_id: int, message: str):
