@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Chat Design</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #020617;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e5e7eb;
+    display: flex;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 260px;
+    background: #020617;
+    border-right: 1px solid #1e293b;
+    padding: 20px;
+  }
+
+  .profile {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .profile h3 {
+    margin: 0;
+    color: #38bdf8;
+  }
+
+  .chat-list div {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background: #0f172a;
+    color: #cbd5f5;
+  }
+
+  .chat-list .active {
+    background: #1e293b;
+  }
+
+  /* Chatbereich */
+  .chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-header {
+    padding: 20px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .chat-header h3 {
+    margin: 0;
+  }
+
+  .messages {
+    flex: 1;
+    padding: 25px;
+    overflow: hidden;
+  }
+
+  .message {
+    margin-bottom: 18px;
+  }
+
+  .user {
+    font-weight: bold;
+    color: #38bdf8;
+  }
+
+  .own .user {
+    color: #22c55e;
+  }
+
+  .text {
+    margin-left: 6px;
+  }
+
+  /* Fake input bar (nur Design) */
+  .fake-input {
+    padding: 20px;
+    border-top: 1px solid #1e293b;
+    color: #64748b;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="profile">
+    <img src="https://via.placeholder.com/90">
+    <h3>Luca</h3>
+  </div>
+
+  <div class="chat-list">
+    <div class="active">💬 chat1</div>
+    <div>💬 chat2</div>
+    <div>💬 chat3</div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="chat-area">
+
+  <div class="chat-header">
+    <h3>chat1</h3>
+  </div>
+
+  <div class="messages">
+    <div class="message">
+      <span class="user">Bot:</span>
+      <span class="text">Willkommen im Chat.</span>
+    </div>
+
+    <div class="message own">
+      <span class="user">Du:</span>
+      <span class="text">Alles klar 👍</span>
+    </div>
+
+    <div class="message">
+      <span class="user">Bot:</span>
+      <span class="text">Das ist nur ein Design.</span>
+    </div>
+  </div>
+
+  <div class="fake-input">
+    Nachricht schreiben…
+  </div>
+
+</div>
+
+</body>
+</html>
