@@ -1,15 +1,20 @@
 from fastapi import FastAPI
+from Classes.class_importer import *
 
 app = FastAPI()
 
-@app.get ("/create_user/{username},{password}")
-def create_user(username: str, password: str):
-    
+@app.post("/create_user/{username},{password}")
+def add_user(username: str, password: str):
+    return create_user(username, password)
 
-@app.get ("/show_chat/{chat_id}")
+@app.delete("/delete_user/{user_id}")
+def del_user(username: str, password: str):
+    return delete_user(user_id)
+
+@app.get("/show_chat/{chat_id}")
 def show_chat(chat_id: int):
     # Chat anzeigen lassen
-    return "user1_id, user2_id, chat_id"
+    return get_chats()
 
 @app.get("/users")
 def users(): 
