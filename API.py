@@ -32,8 +32,8 @@ def login(username: str, password: str):
     }
 
     user = get_user_by_name(username)
-    if user:
-        if user.password == password:
+    if user: #if user checkt, ob user nicht gleich 0 ist
+        if user.password == password: # checkt passwort vom user
             response["msg"] = "Passwort ist richtig, Sie werden eingeloggt."
             response["login"] = True
         else:
