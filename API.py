@@ -5,6 +5,13 @@ app = FastAPI()
 
 @app.post("/create_user/{username},{password}")
 def add_user(username: str, password: str):
+    try:
+        
+
+
+
+
+
     return create_user(username, password)
 
 @app.delete("/delete_user/{user_id}")
@@ -16,8 +23,15 @@ def del_user(user_id: int):
 
 @app.get("/show_chat/{chat_id}")
 def show_chat(chat_id: int):
-    # Chat anzeigen lassen
-    return get_chats()
+
+    return_chat = None
+
+    for c in get_chats():
+        if c.id == chat_id: # Checkt jede Chat ID aus der DB und vergleich sie mit der zu suchenden ID
+            return_chat = c # Weist der return_chat variable dem aktuellen Chat zu 
+            break
+
+    return return_chat
 
 @app.get("/users")
 def users(): 
@@ -49,7 +63,8 @@ async def send_message(sendername: str, chat_id: int, message: str):
     
     response = {
         "sended": False,
-        "msg": "Nachricht konnte nicht versendet werden"
+        "msg": "Nachricht konnte nicht versendet werden",
+        "exception": ""
     }
 
     try:
@@ -58,8 +73,9 @@ async def send_message(sendername: str, chat_id: int, message: str):
         # Wenn try user und message bekommen hat, wird response auf true gesetzt
         response["sended"] = True
         response["msg"] = "Nachricht wurde gesendet."
-    except:
+    except Exception as e: 
         response["msg"] = "Nachricht konnte nicht gesendet werden, bitte erneut versuchen."
+        response["exception"] = e
    
     return response
 
