@@ -109,7 +109,7 @@ def find_chat(user1_id: int, user2_id: int) -> Chat:
     return Chat(*row) if row else None
 
 # Message Operations
-def create_message(chat_id: int, sender_id: int, content: int) -> Message:
+def create_message(chat_id: int, sender_id: int, content: str) -> Message:
     created_at = __get_datetime()
 
     with __get_connection() as conn:

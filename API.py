@@ -32,8 +32,9 @@ def login(username: str, password: str):
     }
 
     user = get_user_by_name(username)
-    if user: #if user checkt, ob user nicht gleich 0 ist
-        if user.password == password: # checkt passwort vom user
+    if user: # if user checkt, ob user nicht gleich 0 ist
+        if user.password == password: # checkt passwort vom user 
+            # Geht hier her, wenn Passwort richtig ist.
             response["msg"] = "Passwort ist richtig, Sie werden eingeloggt."
             response["login"] = True
         else:
@@ -43,18 +44,24 @@ def login(username: str, password: str):
 
     return response
 
-
-@app.post("/send_message/{username1},{username2},{message}")
-async def send_message(user1_id: int, user2_id: int, message: str):
-    # Input: user1_Id, user2_id, message
-    # User sendet Nachricht an anderen User. Wenn Chat noch nicht erstellt, dann einen erstellen. Wenn einer schon
-    # erstellt ist, passiert nix und nachricht wird in den chat geschickt
-    # UserID herausfinden und dem jeweiligen User zuweisen
-    # return output : Nachricht versendet
-
+@app.post("/send_message/{sendername},{chat_id},{message}")
+async def send_message(sendername: str, chat_id: int, message: str):
     
-    return "Neue Nachricht verschickt"
+    response = {
+        "sended": False,
+        "msg": "Nachricht konnte nicht versendet werden"
+    }
 
+    try:
+        sender = get_user_by_name(sendername)
+        create_message(chat_id, sender.id, content = message)
+        # Wenn try user und message bekommen hat, wird response auf true gesetzt
+        response["sended"] = True
+        response["msg"] = "Nachricht wurde gesendet."
+    except:
+        response["msg"] = "Nachricht konnte nicht gesendet werden, bitte erneut versuchen."
+   
+    return response
 
 if __name__ == "__main__":
     import uvicorn
