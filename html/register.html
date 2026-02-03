@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Chat Login</title>
+<title>Account erstellen</title>
 
 <style>
   * {
@@ -20,7 +20,7 @@
     color: #e5e7eb;
   }
 
-  .login-box {
+  .register-box {
     background: #020617;
     padding: 30px;
     width: 320px;
@@ -90,18 +90,19 @@
 
 <body>
 
-<div class="login-box">
-  <h2>Chat Login</h2>
+<div class="register-box">
+  <h2>Account erstellen</h2>
 
-  <form method="post" action="/login">
+  <form method="post" action="/register">
     <input name="username" placeholder="Username" required>
     <input name="password" type="password" placeholder="Passwort" required>
-    <button type="submit">Einloggen</button>
+    <input name="password2" type="password" placeholder="Passwort wiederholen" required>
+    <button type="submit">Registrieren</button>
   </form>
 
   <div class="link">
-    Noch keinen Account?
-    <a href="register.html">Registrieren</a>
+    Bereits registriert?
+    <a href="index.html">Zum Login</a>
   </div>
 </div>
 
