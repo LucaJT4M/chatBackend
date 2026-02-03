@@ -8,6 +8,7 @@ def add_user(username: str, password: str):
     response = {
         "created": False,
         "msg": "User konnte nicht erstellt werden.",
+        "user": None,
         "exception": ""
     }
     try:
@@ -15,10 +16,14 @@ def add_user(username: str, password: str):
         create_user(username, password)
         response["created"] = True
         response["msg"] = "User wurde erstellt."
+        response["user"] = user
+
     except Exception as e: 
         response["msg"] = "User konnte nicht erstellt werden."
         response["exception"] = e
+        
     return response
+
 
 @app.delete("/delete_user/{user_id}")
 def del_user(user_id: int):
