@@ -29,7 +29,34 @@ def index(request: Request):
 @app.post("/login")
 def login(
     username: str = Form(...),
-    password: str = Form(...)
+    password: str = Form(...), 
+    request: Request = None
 ):
-    print("Username", username)
-    print("Password", password)
+    response = requests.get(url+f"/login/{username},{password}")
+    if response.status_code == 200:
+        loginCorrect = json.dumps(response.json()["login"])
+
+        if loginCorrect: #wenn login true ist, dann geht er hier rein
+            response = requests.get(url+"/users") #hier holt er alle user
+            users = response.json()
+            
+            response = requests.get(url+f"/get_chats_from_users/{username}")
+            chats = response.json()
+
+            print("Passwort is korrekt")
+
+            return temp.TemplateResponse(
+                "chat.html",
+                {
+                    "request": request,
+                    "users": users,
+                    "chats": chats
+    
+                }
+            )
+        else: #wenn login falsch ist dann geht er hier rein
+            print(loginCorrect) 
+    else:
+        print(f'Fehler: {response.status_code}\n{response.content}')
+
+    
