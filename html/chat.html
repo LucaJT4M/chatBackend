@@ -92,11 +92,31 @@
     margin-left: 6px;
   }
 
-  /* Fake input bar (nur Design) */
+  /* Fake input bar */
   .fake-input {
-    padding: 20px;
+    padding: 15px 20px;
     border-top: 1px solid #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: #64748b;
+  }
+
+  .fake-input .input {
+    flex: 1;
+    padding: 12px;
+    background: #0f172a;
+    border-radius: 10px;
+  }
+
+  .fake-input button {
+    padding: 12px 18px;
+    background: #38bdf8;
+    color: #020617;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: default;
   }
 </style>
 </head>
@@ -142,7 +162,8 @@
   </div>
 
   <div class="fake-input">
-    Nachricht schreiben…
+    <div class="input">Nachricht schreiben…</div>
+    <button>Senden</button>
   </div>
 
 </div>
