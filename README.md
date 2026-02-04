@@ -2,6 +2,122 @@
 
 ## Kurze Beschreibung
 
+Dieses Repository enthält ein kleines Chat-Backend geschrieben in Python mit FastAPI. Es bietet einfache REST-Endpoints für Benutzerverwaltung, Erstellung von Chats und Senden/Abrufen von Nachrichten. Ein schlichtes HTML-Frontend befindet sich im Ordner `html/`.
+
+**Voraussetzungen**
+
+- Python 3.10 oder neuer
+- Virtuelle Umgebung empfohlen (im Projekt liegt eine venv unter `chatBackend`)
+- Abhängigkeiten: `requirements.txt`
+
+**Schnellstart (Windows, PowerShell)**
+
+1. Virtuelle Umgebung aktivieren:
+
+```powershell
+& .\chatBackend\Scripts\Activate.ps1
+```
+
+2. Abhängigkeiten installieren:
+
+```powershell
+pip install -r requirements.txt
+```
+
+3. Entwicklermanagement-Server starten:
+
+```powershell
+uvicorn API:app --reload --host 127.0.0.1 --port 8000
+```
+
+Die API ist jetzt unter `http://127.0.0.1:8000` erreichbar; die interaktive Swagger-Dokumentation unter `http://127.0.0.1:8000/docs`.
+
+**API-Endpoints (Kurzreferenz mit Beispielen)**
+
+- `POST /create_user/{username},{password}` — Benutzer anlegen
+  - Beispiel (curl):
+
+```bash
+curl -X POST "http://127.0.0.1:8000/create_user/alice,secret"
+```
+
+- `DELETE /delete_user/{user_id}` — Benutzer löschen
+
+```bash
+curl -X DELETE "http://127.0.0.1:8000/delete_user/1"
+```
+
+- `GET /users` — Alle Benutzer anzeigen
+
+```bash
+curl "http://127.0.0.1:8000/users"
+```
+
+- `GET /login/{username},{password}` — Login prüfen
+
+```bash
+curl "http://127.0.0.1:8000/login/alice,secret"
+```
+
+- `POST /send_message/{sendername},{chat_id},{message}` — Nachricht senden
+
+```bash
+curl -X POST "http://127.0.0.1:8000/send_message/alice,1,Hallo%20Welt"
+```
+
+- `GET /show_chat/{chat_id}` — Einzelnen Chat anzeigen
+
+```bash
+curl "http://127.0.0.1:8000/show_chat/1"
+```
+
+- `POST /create_chat/{user1_id},{user2_id}` — Chat erstellen
+
+```bash
+curl -X POST "http://127.0.0.1:8000/create_chat/1,2"
+```
+
+- `GET /get_chats_from_users/{username}` — Chats eines Benutzers abrufen
+
+```bash
+curl "http://127.0.0.1:8000/get_chats_from_users/alice"
+```
+
+Hinweis: Einige Endpoints verwenden Pfadparameter mit Kommas. Beim Verwenden in Shells oder mit bestimmten HTTP-Clients auf URL-Encoding achten.
+
+**Wichtige Projektdateien**
+
+- `API.py` — FastAPI-Anwendung und Routing ([API.py](API.py))
+- `DB_Manager.py` — Datenbank-/Speicher-Operationen ([DB_Manager.py](DB_Manager.py))
+- `Classes/` — `chat.py`, `user.py`, `message.py` und Hilfsdateien ([Classes](Classes))
+- `chatData.db` — lokale SQLite-Datenbank (falls verwendet)
+- `html/` — kleines Frontend: `index.html`, `chat.html`, `register.html` ([html](html))
+
+**Sicherheit & Hinweise**
+
+- Dieses Projekt ist als Lern-/Entwicklungsprojekt gedacht — nicht produktionsreif.
+- Passwörter werden aktuell im Klartext verarbeitet. Für Produktion: Password-Hashing (z. B. `bcrypt`) und HTTPS verwenden.
+- Input-Validierung und Fehlerbehandlung sind rudimentär; für robuste Anwendungen erweitern und Tests hinzufügen.
+
+**Entwicklung & Tests**
+
+- Es sind keine automatischen Tests im Repository vorhanden. Nutze Postman, HTTPie oder curl für manuelle Tests.
+- Zum Entwickeln: `uvicorn` mit `--reload` benutzen, Codeänderungen werden automatisch neu geladen.
+
+**Mitwirken**
+
+- Pull Requests willkommen. Beschreibe Änderungen kurz und liefere reproduzierbare Schritte.
+
+**Lizenz**
+
+- Kein Lizenztext enthalten — bei Bedarf eine Lizenzdatei (`LICENSE`) hinzufügen.
+
+Wenn du möchtest, kann ich noch eine englische Version, ausführliche cURL- und JavaScript-Beispiele für das Frontend oder eine Liste sicherheitsrelevanter Verbesserungen ergänzen.
+
+# ChatBackend
+
+## Kurze Beschreibung
+
 Dieses Repository enthält ein einfaches Chat-Backend in Python (FastAPI). Es stellt REST-Endpoints zur Benutzerverwaltung, Chat-Erstellung und Nachrichtenübertragung bereit. Ein kleines HTML-Frontend liegt im Ordner `html/` bei.
 
 **Voraussetzungen**
