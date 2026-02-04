@@ -46,9 +46,9 @@ def login(
             chat_dtos = []
 
             for c in chats:
-                new_chat_dto = ChatDTO(c.id, c.user1_id, c.user2_id, c.created_at)
-                new_chat_dto.username1 = get_user_by_id(c.user1_id)
-                new_chat_dto.username2 = get_user_by_id(c.user2_id)
+                new_chat_dto = ChatDTO(c["id"], c["user1_id"], c["user2_id"], c["created_at"])
+                new_chat_dto.username1 = get_user_by_id(new_chat_dto.user1_id)
+                new_chat_dto.username2 = get_user_by_id(new_chat_dto.user2_id)
 
                 chat_dtos.append(new_chat_dto)
 
