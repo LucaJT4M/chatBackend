@@ -51,14 +51,13 @@ def login(
                 new_chat_dto.username2 = get_user_by_id(new_chat_dto.user2_id).username
 
                 chat_dtos.append(new_chat_dto) 
-                print(new_chat_dto.username1)
 
             return temp.TemplateResponse(
                 "chat.html",
                 {
                     "request": request,
                     "users": users,
-                    "chats": chats
+                    "chats": chat_dtos
                 }
             )
         else: #wenn login falsch ist dann geht er hier rein
