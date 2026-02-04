@@ -51,7 +51,6 @@ def login(
                     "request": request,
                     "users": users,
                     "chats": chats
-    
                 }
             )
         else: #wenn login falsch ist dann geht er hier rein

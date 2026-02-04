@@ -48,6 +48,17 @@ def get_user_by_name(username: str) -> User:
 
     return User(*row) if row else None
 
+def get_user_by_id(id: int) -> User:
+    with __get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT users.id, users.username, users.password, users.created_at FROM users WHERE users.id = ?",
+            (id,)
+        )
+        row = cursor.fetchone()
+
+    return User(*row) if row else None
+
 def delete_user(user_id: int) -> bool:
     with __get_connection() as conn:
         cursor = conn.cursor()
