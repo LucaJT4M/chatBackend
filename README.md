@@ -1,6 +1,60 @@
-# Chat Backend
+# ChatBackend
 
-Ein einfaches Chat-Anwendungs-Backend, das mit FastAPI entwickelt wurde. Es ermöglicht Benutzern, Konten zu erstellen, Chats zu führen und Nachrichten auszutauschen.
+## Kurze Beschreibung
+
+Dieses Repository enthält ein einfaches Chat-Backend in Python (FastAPI). Es stellt REST-Endpoints zur Benutzerverwaltung, Chat-Erstellung und Nachrichtenübertragung bereit. Ein kleines HTML-Frontend liegt im Ordner `html/` bei.
+
+**Voraussetzungen**
+
+- Python 3.10+ (oder kompatibel)
+- virtuelle Umgebung (im Projektordner liegt eine venv unter `chatBackend`)
+- Abhängigkeiten in `requirements.txt`
+
+**Installation**
+
+1. Virtuelle Umgebung aktivieren (Windows PowerShell):
+
+   `& .\chatBackend\Scripts\Activate.ps1`
+
+2. Abhängigkeiten installieren:
+
+   `pip install -r requirements.txt`
+
+**Starten (Entwicklung)**
+Im Projektstamm starten Sie den Server mit uvicorn:
+
+`uvicorn API:app --reload --host 127.0.0.1 --port 8000`
+
+Danach ist die API unter `http://127.0.0.1:8000` erreichbar. Die automatische API-Dokumentation: `http://127.0.0.1:8000/docs`.
+
+**Wichtige Endpoints (Kurzreferenz)**
+
+- `POST /create_user/{username},{password}` — Benutzer anlegen
+  - Beispiel: `POST http://127.0.0.1:8000/create_user/alice,secret`
+- `DELETE /delete_user/{user_id}` — Benutzer löschen
+- `GET /users` — Alle Benutzer anzeigen
+- `GET /login/{username},{password}` — Login prüfen
+- `POST /send_message/{sendername},{chat_id},{message}` — Nachricht senden
+- `GET /show_chat/{chat_id}` — Einzelnen Chat anzeigen
+- `POST /create_chat/{user1_id},{user2_id}` — Chat zwischen zwei Benutzern erstellen
+- `GET /get_chats_from_users/{username}` — Chats eines Benutzers abrufen
+
+Hinweis: Die Endpoints verwenden einfache Pfadparameter; beim Testen ggf. URL-Encodierung beachten.
+
+**Projektdateien (Auswahl)**
+
+- `API.py` — FastAPI-Anwendung und Routing ([API.py](API.py))
+- `DB_Manager.py` — Datenbank‑/Speicherfunktionen ([DB_Manager.py](DB_Manager.py))
+- `Classes/` — Domain-Modelle und Hilfsfunktionen ([Classes](Classes))
+- `html/` — kleines Frontend mit `chat.html`, `index.html`, `register.html` ([html](html))
+
+**Entwicklung & Hinweise**
+
+- Fehlerbehandlung und Security sind minimal — nicht produktionsreif.
+- Passwords werden derzeit im Klartext verarbeitet — für Produktion unbedingt Hashing verwenden.
+- Tests sind nicht enthalten; bitte manuelle API-Tests oder Postman/HTTPie verwenden.
+
+Wenn du möchtest, formatiere ich die README noch ausführlicher (Beispiele, cURL-Requests, Diagramme).
 
 ## Features
 
