@@ -30,6 +30,7 @@ def del_user(user_id: int):
     response = {
         "deleted": False,
         "msg": "User konnte nicht gelöscht werden.",
+        "user": None,
         "exception": ""
     }
     try:
@@ -37,6 +38,7 @@ def del_user(user_id: int):
         delete_user(user_id)
         response["deleted"] = True
         response["msg"] = "User wurde gelöscht."
+        response["user"] = user
     except Exception as e: 
         response["msg"] = "User konnte nicht gelöscht werden."
         response["exception"] = e
