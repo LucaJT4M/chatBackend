@@ -124,8 +124,7 @@ def get_chats_from_users(username: str):
     user_chats = []
     for c in chats: # for schleife, die durch jeden Chat durch geht und weist das aktuelle Chatobjekt der Variable "c" zu
         if c.user1_id == user.id or c.user2_id == user.id: # Prüft, ob angegebener User in dem Chat mit drin ist
-            chat_dto = ChatDTO(c.id, c.user1_id, c.user2_id, c.created_at)
-            user_chats.append(chat_dto) # Wenn ja, wird der Liste das aktuelle Objekt "c" hinzugefügt.
+            user_chats.append(c) # Wenn ja, wird der Liste das aktuelle Objekt "c" hinzugefügt.
     return user_chats
 
 
