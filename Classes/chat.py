@@ -1,5 +1,3 @@
-from Classes.class_importer import *
-
 class Chat:
     def __init__(self, id: int, user1_id: int, user2_id: int, created_at: str):
         self.id = id

@@ -34,14 +34,13 @@ def add_user(username: str, password: str):
     }
     try:
         user = create_user(username, password)
-        create_user(username, password)
         response["created"] = True
         response["msg"] = "User wurde erstellt."
         response["user"] = user
 
     except Exception as e: 
         response["msg"] = "User konnte nicht erstellt werden."
-        response["exception"] = e
+        response["exception"] = str(e)
         
     return response
 
@@ -54,13 +53,12 @@ def del_user(user_id: int):
         "exception": ""
     }
     try:
-        user = delete_user(user_id)
-        delete_user(user_id)
-        response["deleted"] = True
+        deleted = delete_user(user_id)
+        response["deleted"] = deleted
         response["msg"] = "User wurde gelöscht."
     except Exception as e: 
         response["msg"] = "User konnte nicht gelöscht werden."
-        response["exception"] = e
+        response["exception"] = str(e)
     return response
 
 @app.get("/show_chat/{chat_id}")
@@ -107,19 +105,19 @@ async def send_message(sendername: str, chat_id: int, message: str):
     }
     try:
         sender = get_user_by_name(sendername)
-        create_message(chat_id, sender.id, content = message)
+        msg = create_message(chat_id, sender.id, content=message)
         # Wenn try user und message bekommen hat, wird response auf true gesetzt
         response["sended"] = True
         response["msg"] = "Nachricht wurde gesendet."
-        response["message"] = Message
+        response["message"] = msg
     except Exception as e: 
         response["msg"] = "Nachricht konnte nicht gesendet werden, bitte erneut versuchen."
-        response["exception"] = e
+        response["exception"] = str(e)
     return response
 
 
 @app.post("/create_chat/{user1_id}, {user2_id}")
-def create_chat(user1_id: int, user2_id: int):
+def create_new_chat(user1_id: int, user2_id: int):
     response = {
         "created": False,
         "msg": "Chat konnte nicht erstellt werden.",
@@ -127,14 +125,13 @@ def create_chat(user1_id: int, user2_id: int):
         "exception": ""
     }
     try:
-        create_chat = create_chat(user1_id, user2_id)
-        create_chat(user1_id, user2_id)
+        chat = create_chat(user1_id, user2_id)
         response["created"] = True
         response["msg"] = "Chat wurde erstellt."
-        response["chat"] = Chat
+        response["chat"] = chat
     except Exception as e: 
         response["msg"] = "Chat konnte nicht erstellt werden."
-        response["exception"] = e
+        response["exception"] = str(e)
     return response
 
 
