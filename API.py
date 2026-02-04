@@ -1,7 +1,28 @@
 from fastapi import FastAPI
 from Classes.class_importer import *
 
-app = FastAPI()
+description = """
+**API-Endpoints**
+
+- POST /create_user/{username},{password} — Benutzer anlegen
+
+- DELETE /delete_user/{user_id} — Benutzer löschen
+
+- GET /users — Alle Benutzer anzeigen
+
+- GET /login/{username},{password} — Login prüfen
+
+- POST /send_message/{sendername},{chat_id},{message} — Nachricht senden
+
+- GET /show_chat/{chat_id} — Einzelnen Chat anzeigen
+
+- POST /create_chat/{user1_id},{user2_id} — Chat erstellen
+
+- GET /get_chats_from_users/{username} — Chats eines Benutzers abrufen
+
+"""
+
+app = FastAPI(description=description)
 
 @app.post("/create_user/{username},{password}")
 def add_user(username: str, password: str):
