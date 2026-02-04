@@ -13,3 +13,5 @@ class ChatDTO:
         self.username1 = get_user_by_id(user1_id)
         self.username2 = get_user_by_id(user2_id)
         self.created_at = created_at
+        self.user1_id = user1_id
+        self.user2_id = user2_id
