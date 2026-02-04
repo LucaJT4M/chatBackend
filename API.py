@@ -30,7 +30,6 @@ def del_user(user_id: int):
     response = {
         "deleted": False,
         "msg": "User konnte nicht gelöscht werden.",
-        "user": None,
         "exception": ""
     }
     try:
@@ -38,7 +37,6 @@ def del_user(user_id: int):
         delete_user(user_id)
         response["deleted"] = True
         response["msg"] = "User wurde gelöscht."
-        response["user"] = user
     except Exception as e: 
         response["msg"] = "User konnte nicht gelöscht werden."
         response["exception"] = e
@@ -83,6 +81,7 @@ async def send_message(sendername: str, chat_id: int, message: str):
     response = {
         "sended": False,
         "msg": "Nachricht konnte nicht versendet werden",
+        "message": None,
         "exception": ""
     }
     try:
@@ -91,10 +90,35 @@ async def send_message(sendername: str, chat_id: int, message: str):
         # Wenn try user und message bekommen hat, wird response auf true gesetzt
         response["sended"] = True
         response["msg"] = "Nachricht wurde gesendet."
+        response["message"] = Message
     except Exception as e: 
         response["msg"] = "Nachricht konnte nicht gesendet werden, bitte erneut versuchen."
         response["exception"] = e
     return response
+
+
+@app.post("/create_chat/{user1_id}, {user2_id}")
+def create_chat(user1_id: int, user2_id: int):
+    response = {
+        "created": False,
+        "msg": "Chat konnte nicht erstellt werden.",
+        "chat": None,
+        "exception": ""
+    }
+    try:
+        create_chat = create_chat(user1_id, user2_id)
+        create_chat(user1_id, user2_id)
+        response["created"] = True
+        response["msg"] = "Chat wurde erstellt."
+        response["chat"] = Chat
+    except Exception as e: 
+        response["msg"] = "Chat konnte nicht erstellt werden."
+        response["exception"] = e
+    return response
+
+
+
+
 
 
 @app.get("/get_chats_from_users/{username}")
